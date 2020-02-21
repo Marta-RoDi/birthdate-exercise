@@ -3,7 +3,7 @@ const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
   name: String,
-  birthdate: Date,
+  birthdate: {type: Date, default: new Date()}
 },
 
  {
