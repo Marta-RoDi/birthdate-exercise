@@ -6,6 +6,7 @@ const express      = require('express');
 const favicon      = require('serve-favicon');
 const logger       = require('morgan');
 const path         = require('path');
+const cors = require('cors');
 
 require("./configs/mongoose");
 
@@ -13,6 +14,18 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+
+var whitelist = [
+  'http://localhost:3000'
+];
+var corsOptions = {
+  origin: function(origin, callback){
+      var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+      callback(null, originIsWhitelisted);
+  },
+  credentials: true
+};
+app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

@@ -14,7 +14,6 @@ router.get('/user/:id', (req, res, next) => {
   const idUser = req.params.id
   User.findById(idUser)
   .then(thisUser => res.json(thisUser))
-  .catch(err => console.log(err))
 })
 
 router.post('/new', (req, res) => {
