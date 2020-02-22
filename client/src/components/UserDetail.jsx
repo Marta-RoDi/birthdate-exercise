@@ -12,16 +12,36 @@ class UserDetail extends Component{
   }
 
   componentDidMount() {
-    this.service.get(this.props.id).then(response => {
+    const idUser = this.props.match.params.id
+    this.service.get(idUser).then(response => {
       this.setState({
         user: response
       })
     })
   }
+
+  deleteUser(userDelete) {
+    this.service.remove(userDelete).then(response => {
+      this.setState({
+        users: response
+      });
+      window.location = "/"
+    });
+  }
   
   render(){
     return(
-      <div><p>name: {this.state.user.name}</p></div>
+      <div>
+        <p>Nombre: {this.state.user.name}</p>
+        <p>Cumpleaños: {this.state.user.birthdate}</p>
+        <button className="panel-delete"
+          onClick={() => {
+            this.deleteUser(this.state.user._id);
+            }}
+            >
+            Eliminar
+        </button>
+      </div>
     )
   }
 }

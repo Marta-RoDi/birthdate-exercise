@@ -20,6 +20,14 @@ class Home extends Component{
     })
   }
 
+  deleteUser(userDelete) {
+    this.service.remove(userDelete).then(response => {
+      this.setState({
+        users: response
+      });
+    });
+  }
+
   render(){
     return(
       <React.Fragment>
@@ -29,6 +37,13 @@ class Home extends Component{
             return (
               <li key={idx}>
                 <Link to={`/user/${oneUser._id}`}><p>{oneUser.name}</p></Link>
+                <button className="panel-delete"
+                onClick={() => {
+                  this.deleteUser(oneUser._id);
+                }}
+              >
+                Eliminar
+              </button>
               </li>
             )
           })}

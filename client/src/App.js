@@ -11,9 +11,9 @@ class App extends Component{
     return (
      <div className="App">
        <Switch>
-        <Route exact path="/" render={() => <Home/>}></Route>
-        <Route exact path="/user/:id" render={() => <UserDetail/>}></Route>
-        <Route exact path="/new" render={() => <NewUser/>}></Route>
+       <Route exact path="/" component={Home}></Route>
+        <Route exact path="/user/:id" component={UserDetail}></Route>
+        <Route exact path="/new" component={NewUser}></Route>
        </Switch>
      </div>
     )

@@ -9,6 +9,22 @@ let users = [
   {
     name: "Andrea",
     birthdate: "1999-01-07T00:00:00.000+0000"
+  },
+  {
+    name: "Marta",
+    birthdate: "1991-07-04T00:00:00.000+0000"
+  },
+  {
+    name: "Andrea",
+    birthdate: "1999-01-07T00:00:00.000+0000"
+  },
+  {
+    name: "Marta",
+    birthdate: "1991-07-04T00:00:00.000+0000"
+  },
+  {
+    name: "Andrea",
+    birthdate: "1999-01-07T00:00:00.000+0000"
   }
 ]
 

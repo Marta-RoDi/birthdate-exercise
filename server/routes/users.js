@@ -16,15 +16,6 @@ router.get('/user/:id', (req, res, next) => {
   .then(thisUser => res.json(thisUser))
 })
 
-router.post('/new', (req, res) => {
-  const {name, birthdate} = req.body;
-  User.create({name, birthdate})
-  .then(() => {
-    User.find()
-    .then(allUsers => res.json(allUsers))
-  })
-}) 
-
 router.post('/edit/:id', (req, res, next) => {
   const {name, birthdate} = req.body;
   const idUser = req.params.id;
@@ -35,8 +26,24 @@ router.post('/edit/:id', (req, res, next) => {
 router.get('/delete/:id', (req, res) => {
   const idUser = req.params.id;
   User.findByIdAndRemove({_id: idUser})
-  .then(deleteUser => res.json(deleteUser))
+  .then(() => {
+    User.find() .then(allUsers => {
+      res.json(allUsers)
+    })
+  })
 })
+
+router.post('/new', (req, res) => {
+  const {name, birthdate} = req.body;
+  User.create({
+    name: name,
+    birthdate: birthdate
+  })
+  .then(() => {
+    User.find()
+    .then(allUsers => res.json(allUsers))
+  })
+}) 
 
 
 
