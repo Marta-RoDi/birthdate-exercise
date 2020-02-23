@@ -1,0 +1,66 @@
+
+.title{
+  margin-top:1rem;
+  @media screen and (max-width: $break-mobile) {
+    font-size:2rem;
+  }
+}
+
+.information-text{
+  @media screen and (max-width: $break-mobile) {
+    margin-bottom: 0;
+  }
+}
+
+.user-list{
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top:2rem;
+  @media screen and (max-width: $break-mobile) {
+    padding:0;
+  }
+
+  &__item{
+    width:27%;
+    border:1px solid $principal-color;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    @media screen and (max-width: $break-tablet) {
+      width:45%;
+    }
+    @media screen and (max-width: $break-mobile) {
+      width:100%;
+    }
+
+    & a{
+      color:$principal-color;
+      font-size: 1.2rem;
+      text-decoration: none;
+      display:block;
+      width: 35%;
+      margin:0 auto 1.5rem;
+
+      &:hover{
+        color:$third-color;
+      }
+    }
+  }
+}
+
+.delete-user{
+  border:1px solid $secundary-color;
+  background-color:$principal-color;
+  color:$secundary-color;
+  padding: 0.5rem;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+  &:hover{
+    border:1px solid $principal-color;
+    background-color:$secundary-color;
+    color:$principal-color;
+  }
+}

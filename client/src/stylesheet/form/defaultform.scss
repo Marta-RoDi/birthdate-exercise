@@ -1,0 +1,70 @@
+.default-form{
+  width: 70%;
+  margin: 2rem auto 0;
+  border:1px solid $principal-color;
+  padding: 1.5rem 0 1.5rem;
+  @media screen and (max-width: $break-tablet) {
+    width:100%;
+  }
+
+  &__text{
+    color:$principal-color;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom:1.5rem;
+  }
+
+  &__fields{
+    display:flex;
+    justify-content: center;
+    @media screen and (max-width: $break-mobile) {
+      flex-direction:column;
+      align-items:center;
+    }
+  }
+  &__input{
+    border:1px solid $principal-color;
+    color:$principal-color;
+    margin-right:0.5rem;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding:0.4rem 0.6rem 0.4rem 0.4rem;
+    @media screen and (max-width: $break-mobile) {
+      width: 90%;
+      margin-bottom: 1rem;
+      margin-right: 0;
+    }
+  }
+
+  &__button{
+    background-color: $principal-color;
+    border:1px solid $principal-color;
+    color:$secundary-color;
+    padding: 0.5rem 1rem;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-top: 1rem;
+    @media screen and (max-width: $break-mobile) {
+      width: 90%;
+    }
+
+    &:hover{
+      background-color:$secundary-color;
+      color:$principal-color;
+    }
+  }
+}
+
+::-webkit-input-placeholder {
+  color: $principal-color;
+}
+
+:-ms-input-placeholder { 
+  color: $principal-color;
+}
+
+::placeholder {
+  color: $principal-color;
+}
