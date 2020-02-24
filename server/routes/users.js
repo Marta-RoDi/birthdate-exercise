@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
-
-
 router.get('/', (req, res, next) => {
   User.find()
   .then(allUsers => res.json(allUsers))
@@ -14,6 +12,7 @@ router.get('/user/:id', (req, res, next) => {
   const idUser = req.params.id
   User.findById(idUser)
   .then(thisUser => res.json(thisUser))
+  .catch(err => console.log(err))
 })
 
 router.post('/edit/:id', (req, res, next) => {
@@ -21,6 +20,7 @@ router.post('/edit/:id', (req, res, next) => {
   const idUser = req.params.id;
   User.findByIdAndUpdate({_id: idUser}, {$set: {name, birthdate}}, {new: true})
   .then(updateUser => res.json(updateUser))
+  .catch(err => console.log(err))
 })
 
 router.get('/delete/:id', (req, res) => {
@@ -31,6 +31,7 @@ router.get('/delete/:id', (req, res) => {
       res.json(allUsers)
     })
   })
+  .catch(err => console.log(err))
 })
 
 router.post('/new', (req, res, next) => {
@@ -46,7 +47,9 @@ router.post('/new', (req, res, next) => {
   .then(() => {
     User.find()
     .then(allUsers => res.json(allUsers))
+    .catch(err => console.log(err))
   })
+  .catch(err => console.log(err))
 }) 
 
 
