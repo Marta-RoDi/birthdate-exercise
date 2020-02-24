@@ -1,60 +1,61 @@
 .default-form{
-  width: 70%;
-  margin: 2rem auto 0;
+  width:70%;
+  margin:2rem auto 0;
   border:1px solid $principal-color;
-  padding: 1.5rem 0 1.5rem;
+  padding:1.5rem 0 1.5rem;
   @media screen and (max-width: $break-tablet) {
     width:100%;
   }
 
   &__text{
     color:$principal-color;
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size:1.1rem;
+    font-weight:bold;
     margin-bottom:2rem;
   }
 
   &__fields{
     display:flex;
-    justify-content: center;
+    justify-content:center;
     position: relative;
     @media screen and (max-width: $break-mobile) {
       flex-direction:column;
       align-items:center;
     }
   }
+
   &__input{
     border:1px solid $principal-color;
     color:$principal-color;
     margin-right:0.5rem;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
     padding:0.4rem 0.6rem 0.4rem 0.4rem;
-    width: 35%;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    width:35%;
+    -webkit-appearance:none;
+    -moz-appearance:none;
     @media screen and (max-width: $break-tablet) {
-      width: 40%;
+      width:40%;
     }
     @media screen and (max-width: $break-mobile) {
-      width: 90%;
-      margin-bottom: 2rem;
-      margin-right: 0;
+      width:90%;
+      margin-bottom:2rem;
+      margin-right:0;
     }
   }
 
   &__button{
-    background-color: $principal-color;
+    background-color:$principal-color;
     border:1px solid $principal-color;
     color:$secundary-color;
-    padding: 0.5rem 1rem;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    margin-top: 1rem;
+    padding:0.5rem 1rem;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius:10px;
+    margin-top:1rem;
     @media screen and (max-width: $break-mobile) {
-      width: 90%;
+      width:90%;
     }
 
     &:hover{
@@ -64,103 +65,117 @@
   }
 
   &__error-name{
-    position: absolute;
-    color: red;
-    left: calc(50% - 215px);
-    top: -1.6rem;
-    font-size: 0.9rem;
+    position:absolute;
+    color:red;
+    left:calc(50% - 215px);
+    top:-1.6rem;
+    font-size:0.9rem;
     @media screen and (max-width: $break-tablet) {
-      left: calc(50% - 185px);
+      left:calc(50% - 185px);
     }
     @media screen and (max-width: $break-mobile) {
-      left: 7%;
-      top: 30%;
+      left:7%;
+      top:30%;
     }
   }
 
   &__error-birthdate{
-    position: absolute;
-    color: red;
-    right: calc(50% - 200px);
-    top: -1.6rem;
-    font-size: 0.9rem;
+    position:absolute;
+    color:red;
+    right:calc(50% - 200px);
+    top:-1.6rem;
+    font-size:0.9rem;
     @media screen and (max-width: $break-tablet) {
-      right: calc(50% - 170px);
+      right:calc(50% - 170px);
     }
     @media screen and (max-width: $break-mobile) {
-      left: -43%;
-      top: 80%;
+      left:-43%;
+      top:80%;
     }
   }
 }
 
 .default-alert{
-  background: $principal-color;
+  background:$principal-color;
   color:$secundary-color;
   text-align:center;
-  padding: 0.5rem;
+  padding:0.5rem;
   margin:1.5rem auto 0;
   border-radius:5px;
-  width: 42%;
-  animation: 4s fadeIn forwards;
+  width:42%;
+  animation:4s fadeIn forwards;
   @media screen and (max-width: $break-tablet) {
-    width: 60%;
+    width:60%;
   }
   @media screen and (max-width: $break-mobile) {
-    width: 90%;
+    width:90%;
+  }
+  @media screen and (max-width: $break-mobile-xs) {
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    -webkit-transform:translate(-50%, -50%);
   }
 }
 
 @-webkit-keyframes fadeIn {
   0% {
-    opacity: 0;
+    opacity:0;
   }
 
   50% {
-    opacity: 1;
+    opacity:1;
   }
 
   75% {
-    opacity: 1;
+    opacity:1;
   }
 
   100% {
-    opacity: 0;
+    opacity:0;
   }
 }
 
 @keyframes fadeIn {
   0% {
-    opacity: 0;
+    opacity:0;
   }
 
   50% {
-    opacity: 1;
+    opacity:1;
   }
 
   75% {
-    opacity: 1;
+    opacity:1;
   }
 
   100% {
-    opacity: 0;
+    opacity:0;
   }
 }
 
 .fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
+  -webkit-animation-name:fadeIn;
+  animation-name:fadeIn;
 }
 
-
 ::-webkit-input-placeholder {
-  color: $principal-color;
+  color:$principal-color;
 }
 
 :-ms-input-placeholder { 
-  color: $principal-color;
+  color:$principal-color;
 }
 
 ::placeholder {
-  color: $principal-color;
+  color:$principal-color;
+}
+
+button:focus {
+  outline:none !important;
+  outline-width:0 !important;
+  box-shadow:none;
+  -moz-box-shadow:none;
+  -webkit-box-shadow:none;
 }

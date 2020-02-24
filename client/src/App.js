@@ -7,23 +7,23 @@ import NavBar from './components/NavBar/Navbar'
 import Home from './components/Home/Home';
 import UserDetail from './components/UserDetail/UserDetail';
 import NewUser from './components/NewUser/NewUser';
-import ErrorBoundary from 'react-error-boundary';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 class App extends Component{
 
   render(){
     return (
      <div className="App">
-      <ErrorBoundary>
-        <header className="header">
+      <header className="header">
+        <ErrorBoundary>
           <NavBar></NavBar>
-        </header>
-        <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <Route exact path="/user/:id" component={UserDetail}></Route>
-          <Route exact path="/new" component={NewUser}></Route>
-        </Switch>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </header>
+      <Switch>
+        <Route exact path="/" component={Home}></Route>
+        <Route exact path="/user/:id" component={UserDetail}></Route>
+        <Route exact path="/new" component={NewUser}></Route>
+      </Switch>
     </div>
     )
   }

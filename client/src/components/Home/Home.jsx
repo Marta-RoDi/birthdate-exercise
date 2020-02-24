@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../tools/userService';
 import {Container, Row, Col} from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
+import {Animated} from "react-animated-css";
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 class Home extends Component{
   constructor(props){
@@ -29,7 +32,13 @@ class Home extends Component{
   }
 
   render(){
+
+    if(this.state.users.length === 0){
+      return <Spinner className="spinner" animation="border" />
+    }
+
     return(
+      <ErrorBoundary>
       <Container>
         <Row>
           <Col>
@@ -39,25 +48,28 @@ class Home extends Component{
         </Row>
         <Row>
           <Col>
-            <ul className="user-list">
-              {this.state.users.map((oneUser, idx) => {
-                return (
-                  <li key={idx} className="user-list__item">
-                    <Link to={`/user/${oneUser._id}`}>{oneUser.name}</Link>
-                    <button className="delete-user"
-                    onClick={() => {
-                    this.deleteUser(oneUser._id);
-                    }}
-                    >
-                      Eliminar
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
+            <Animated animationIn="fadeInUp" isVisible={true}>
+              <ul className="user-list">
+                {this.state.users.map((oneUser, idx) => {
+                  return (
+                    <li key={idx} className="user-list__item">
+                      <Link to={`/user/${oneUser._id}`}>{oneUser.name}</Link>
+                      <button className="delete-user"
+                      onClick={() => {
+                      this.deleteUser(oneUser._id);
+                      }}
+                      >
+                        Eliminar
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
+            </Animated>
           </Col>
         </Row>
       </Container>
+      </ErrorBoundary>
     )
   }
 }

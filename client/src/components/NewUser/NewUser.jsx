@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import userService from '../../tools/userService';
 import {Container, Row, Col} from 'react-bootstrap';
 import moment from 'moment';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 class NewUser extends Component {
   constructor(props){
@@ -29,7 +30,7 @@ class NewUser extends Component {
       birthdateError = "Introduzca una fecha"
     }
 
-    if(this.state.birthdate && moment(this.state.birthdate).format() > moment('2020-03-01').max('2020-03-01').format() || moment(this.state.birthdate).format() < moment('1910-01-01').max('1910-01-01').format()){
+    if((this.state.birthdate && moment(this.state.birthdate).format() > moment('2020-03-01').max('2020-03-01').format()) || moment(this.state.birthdate).format() < moment('1910-01-01').max('1910-01-01').format()){
       birthdateError = "Formato no válido"
     }
 
@@ -38,7 +39,6 @@ class NewUser extends Component {
       return false;
     }
     return true;
-    
   }
 
   addNewUser = () => {
@@ -84,34 +84,36 @@ class NewUser extends Component {
 
   render() {
     return(
-      <Container>
-        <Row>
-          <Col>
-            <form className="default-form new-user-form" onSubmit={this.handleSubmit}>
-              <p className="default-form__text">Crear un nuevo usuario:</p>
-              <div className="default-form__fields">
-                <input placeholder="Nombre" className="default-form__input" name="name" type="text" value={this.state.name} onChange={e => this.handleChange(e)}></input>
-                {this.state.nameError &&
-                <p className="default-form__error-name">
-                {this.state.nameError}
-                </p>
-                }
-                <input maxLength="10" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" placeholder="Cumpleaños" className="default-form__input" name="birthdate" type="date" value={this.state.birthdate} onChange={e => this.handleChange(e)}></input>
-                {this.state.birthdateError &&
-                <p className="default-form__error-birthdate">
-                {this.state.birthdateError}
-                </p>
-                }
-              </div>
-              <button className="default-form__button" type="submit">Añadir usuario</button>
-             
-            </form>
-            {this.state.message && (
-                <p className="default-alert">{this.state.message}</p>
-              )}
-          </Col>
-        </Row>
-      </Container>
+      <ErrorBoundary>
+        <Container>
+          <Row>
+            <Col>
+              <form className="default-form new-user-form" onSubmit={this.handleSubmit}>
+                <p className="default-form__text">Crear un nuevo usuario:</p>
+                <div className="default-form__fields">
+                  <input placeholder="Nombre" className="default-form__input" name="name" type="text" value={this.state.name} onChange={e => this.handleChange(e)}></input>
+                  {this.state.nameError &&
+                  <p className="default-form__error-name">
+                  {this.state.nameError}
+                  </p>
+                  }
+                  <input maxLength="10" pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" placeholder="Cumpleaños" className="default-form__input" name="birthdate" type="date" value={this.state.birthdate} onChange={e => this.handleChange(e)}></input>
+                  {this.state.birthdateError &&
+                  <p className="default-form__error-birthdate">
+                  {this.state.birthdateError}
+                  </p>
+                  }
+                </div>
+                <button className="default-form__button" type="submit">Añadir usuario</button>
+              
+              </form>
+              {this.state.message && (
+                  <p className="default-alert">{this.state.message}</p>
+                )}
+            </Col>
+          </Row>
+        </Container>
+      </ErrorBoundary>
     )
   }
 }

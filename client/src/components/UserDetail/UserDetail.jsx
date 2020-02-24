@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import userService from '../../tools/userService';
 import moment from 'moment';
 import {Container, Row, Col} from 'react-bootstrap';
+import { Spinner } from 'react-bootstrap';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
 class UserDetail extends Component{
   constructor(props){
     super(props);
 
     this.state = {
+      users: [],
       _id: "",
       name: "",
       birthdate: "",
@@ -50,7 +53,7 @@ class UserDetail extends Component{
       birthdateError = "Introduzca una fecha"
     }
 
-    if(this.state.birthdate && moment(this.state.birthdate).format() > moment('2020-03-01').max('2020-03-01').format() || moment(this.state.birthdate).format() < moment('1910-01-01').max('1910-01-01').format()){
+    if((this.state.birthdate && moment(this.state.birthdate).format() > moment('2020-03-01').max('2020-03-01').format()) || moment(this.state.birthdate).format() < moment('1910-01-01').max('1910-01-01').format()){
       birthdateError = "Formato no válido"
     }
 
@@ -59,7 +62,6 @@ class UserDetail extends Component{
       return false;
     }
     return true;
-    
   }
 
   editUser(){
@@ -102,51 +104,56 @@ class UserDetail extends Component{
     this.setState({ [name]: value })
   }
 
-
-  
   render(){
+
+   if(!this.state._id){
+        return <Spinner className="spinner" animation="border" />
+      } 
+
     return(
-      <Container>
-        <Row className="justify-content-center">
-          <Col>
-            <p className="name"><span className="bold">Nombre:</span> {this.state.name}</p>
-            <p className="birthdate"><span className="bold">Cumpleaños:</span> {this.state.birthdate}</p>
-            <button className="delete-user"
-              onClick={() => {
-                this.deleteUser(this.state._id);
-              }}
-            >
-              Eliminar
-            </button>
-        </Col>
+      <ErrorBoundary>
+        <Container>
+          <Row className="justify-content-center">
+            <Col>
+              <p className="name"><span className="bold">Nombre:</span> {this.state.name}</p>
+              <p className="birthdate"><span className="bold">Cumpleaños:</span> {this.state.birthdate}</p>
+              <button className="delete-user"
+                onClick={() => {
+                  this.deleteUser(this.state._id);
+                }}
+              >
+                Eliminar
+              </button>
+          </Col>
+          </Row>
+          <Row className="justify-content-center">
+            <Col>
+            <form className="default-form new-user-form" onSubmit={this.handleSubmit}>
+                <p className="default-form__text">Actualizar usuario:</p>
+                <div className="default-form__fields">
+                  <input placeholder="Nombre" className="default-form__input" name="name" type="text" value={this.state.name} onChange={e => this.handleChange(e)}></input>
+                  {this.state.nameError &&
+                  <p className="default-form__error-name">
+                  {this.state.nameError}
+                  </p>
+                  }
+                  <input maxLength="10"  pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" placeholder="Cumpleaños" className="default-form__input" name="birthdate" type="date" value={this.state.birthdate} onChange={e => this.handleChange(e)}></input>
+                  {this.state.birthdateError &&
+                  <p className="default-form__error-birthdate">
+                  {this.state.birthdateError}
+                  </p>
+                  }
+                </div>
+                <button className="default-form__button" type="submit">Guardar cambios</button>
+              
+              </form>
+              {this.state.message && (
+                  <p className="default-alert">{this.state.message}</p>
+                )}
+          </Col>
         </Row>
-        <Row className="justify-content-center">
-          <Col>
-          <form className="default-form new-user-form" onSubmit={this.handleSubmit}>
-              <p className="default-form__text">Actualizar usuario:</p>
-              <div className="default-form__fields">
-                <input placeholder="Nombre" className="default-form__input" name="name" type="text" value={this.state.name} onChange={e => this.handleChange(e)}></input>
-                {this.state.nameError &&
-                <p className="default-form__error-name">
-                {this.state.nameError}
-                </p>
-                }
-                <input maxLength="10"  pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" placeholder="Cumpleaños" className="default-form__input" name="birthdate" type="date" value={this.state.birthdate} onChange={e => this.handleChange(e)}></input>
-                {this.state.birthdateError &&
-                <p className="default-form__error-birthdate">
-                {this.state.birthdateError}
-                </p>
-                }
-              </div>
-              <button className="default-form__button" type="submit">Guardar cambios</button>
-             
-            </form>
-            {this.state.message && (
-                <p className="default-alert">{this.state.message}</p>
-              )}
-        </Col>
-      </Row>
-    </Container>
+      </Container>
+    </ErrorBoundary>
     )
   }
 }

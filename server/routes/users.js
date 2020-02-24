@@ -34,12 +34,8 @@ router.get('/delete/:id', (req, res) => {
   .catch(err => console.log(err))
 })
 
-router.post('/new', (req, res, next) => {
+router.post('/new', (req, res) => {
   const {name, birthdate} = req.body;
-
-  if (!name || !birthdate){
-    next(new Error('You must provide a value'));
-  }
   User.create({
     name: name,
     birthdate: birthdate
@@ -51,7 +47,5 @@ router.post('/new', (req, res, next) => {
   })
   .catch(err => console.log(err))
 }) 
-
-
 
 module.exports = router;

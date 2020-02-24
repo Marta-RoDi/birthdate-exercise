@@ -5,7 +5,9 @@
 @import "../components/NavBar/navbar.scss";
 @import "../components/Home/home.scss";
 @import "../components/UserDetail/userdetail.scss";
-@import "../components/NewUser/NewUser.scss";
 
 //FORM
 @import "form/defaultform";
+
+//SPINNER
+@import "spinner/spinner";
